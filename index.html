@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Schokoladensouffle Talk</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="talk.css" />
+		<script src="jssip-3.4.3.min.js"></script>
+		<script src="schokomedia.js"></script>
+		<script src="schokocall.js"></script>
+		<script src="schokoua.js"></script>
+		<script src="auth.js"></script>
+		<script src="talk.js"></script>
+	</head>
+	<body>
+		<audio id="remote" playsinline autoplay></audio>
+		<video id="remotemain" muted playsinline autoplay></video>
+		<div id="sfu"></div>
+		<video id="local" muted playsinline autoplay></video>
+		<div id="control">
+			<div id="field">
+				<input type="tel" id="number" pattern="[0-9*#]{1,}" size="4" maxlength="4" />
+				<div id="toolbox">
+					<button id="call">anrufen</button>
+					<button id="vicall">Videoanruf</button>
+					<button id="hangup">auflegen</button>
+					<button id="screenie">Screensharing</button>
+					<button id="mutie">Mute</button>
+					<button id="vimutie">Video</button>
+				</div>
+			</div>
+			<div id="keypad">
+				<button id="n1" data-dtmf="1">1</button>
+				<button id="n2" data-dtmf="2">2</button>
+				<button id="n3" data-dtmf="3">3</button>
+				<button id="n4" data-dtmf="4">4</button>
+				<button id="n5" data-dtmf="5">5</button>
+				<button id="n6" data-dtmf="6">6</button>
+				<button id="n7" data-dtmf="7">7</button>
+				<button id="n8" data-dtmf="8">8</button>
+				<button id="n9" data-dtmf="9">9</button>
+				<button id="n0" data-dtmf="0">0</button>
+				<button id="na" data-dtmf="*">*</button>
+				<button id="nb" data-dtmf="#">#</button>
+			</div>
+		</div>
+	</body>
+</html>
