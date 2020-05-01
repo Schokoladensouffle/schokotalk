@@ -17,10 +17,20 @@ class SchokoUA {
 		this._ua.on('newRTCSession', (event) => {
 			this._onsession(event);
 		});
+		this._ua.on('registrationFailed', (event) => {
+			this._onregistrationfailed(event);
+		});
 		this._ua.start();
 
 		this._session = null;
 		this._display = display;
+	}
+
+	_onregistrationfailed(event) {
+		if(event.cause == JsSIP.C.causes.AUTHENTICATION_ERROR) {
+			location.href = '/login.html';
+			return;
+		}
 	}
 
 	get session() {
