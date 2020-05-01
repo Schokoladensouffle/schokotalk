@@ -50,7 +50,12 @@ class SchokoMedia {
 
 	_renderpip(main, pip) {
 		this._rendervideo(main, 0, 0, 1, 1);
-		this._rendervideo(pip, 3/4, 0, 1/4, 1/4);
+
+		const mainratio = this._canvas.width / this._canvas.height;
+		const pipratio = pip.videoWidth / pip.videoHeight;
+		const pipwidth = Math.sqrt(pipratio / mainratio) / 4;
+		const pipheight = Math.sqrt(mainratio / pipratio) / 4;
+		this._rendervideo(pip, 1 - pipwidth, 0, pipwidth, pipheight);
 	}
 
 	_renderone(vid) {
@@ -63,14 +68,27 @@ class SchokoMedia {
 	}
 
 	_render() {
+		const mainscreen = this.hasScreen ? this._screenvideo : this._videovideo;
+		const peerscreen = this.hasScreen ? this._videovideo : null;
+
+		this._canvas.width = mainscreen.videoWidth;
+		this._canvas.height = mainscreen.videoHeight;
 		this._ctx.fillStyle = '#BBBBBB';
 		this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
 
-		if(this.hasVideo && this.hasScreen) {
-			this._renderpip(this._video[this._userscreen], this._video[this._uservideo]);
-		} else if(this.hasVideo || this.hasScreen) {
-			this._renderone(this._video[this.hasVideo ? this._uservideo : this._userscreen]);
+		if(peerscreen) {
+			this._renderpip(mainscreen, peerscreen);
+		} else if(mainscreen) {
+			this._renderone(mainscreen);
 		}
+	}
+
+	get _videovideo() {
+		return this.hasVideo ? this._video[this._uservideo] : null;
+	}
+
+	get _screenvideo() {
+		return this.hasScreen ? this._video[this._userscreen] : null;
 	}
 
 	get hasVideo() {
