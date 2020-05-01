@@ -25,7 +25,7 @@ class SchokoMedia {
 		});
 		this._stream.addTrack(canvastrack);
 
-		window.setInterval(() => {
+		this._update = window.setInterval(() => {
 			this._render();
 		}, 1000/30);
 	}
@@ -166,6 +166,7 @@ class SchokoMedia {
 				track.stop();
 			});
 		});
+		window.clearInterval(this._update);
 	}
 
 	static async init(opts) {
