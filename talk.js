@@ -76,9 +76,9 @@ window.addEventListener('load', () => {
 		},
 		set displayscreen(isshared) {
 			if(isshared) {
-				vimutie.classList.add('isshared');
+				screenie.classList.add('isshared');
 			} else {
-				vimutie.classList.remove('isshared');
+				screenie.classList.remove('isshared');
 			}
 		}
 	};
