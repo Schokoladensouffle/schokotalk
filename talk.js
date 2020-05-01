@@ -114,9 +114,10 @@ window.addEventListener('load', () => {
 		location.href = '/login.html';
 		return;
 	}
+	const exten = localStorage.getItem('exten');
 	const username = localStorage.getItem('username');
 	const password = localStorage.getItem('password');
-	ua = new SchokoUA(username, password, uadisplay);
+	ua = new SchokoUA(exten, username, password, uadisplay);
 
 	call.addEventListener('click', () => {
 		if(number.value) {

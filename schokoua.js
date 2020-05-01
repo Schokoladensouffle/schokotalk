@@ -1,11 +1,11 @@
 class SchokoUA {
-	constructor(username, password, display, opts) {
+	constructor(exten, username, password, display, opts) {
 		opts = opts || {};
 
 		const server = opts.server || 'talk.schokoladensouffle.eu';
 		const signalserver = opts.signalserver || ('wss://' + server + '/ws');
 
-		const uri = 'sip:' + username + '@' + server;
+		const uri = 'sip:' + exten + '@' + server;
 		const socket = new JsSIP.WebSocketInterface(signalserver);
 
 		this._ua = new JsSIP.UA({
