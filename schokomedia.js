@@ -71,8 +71,10 @@ class SchokoMedia {
 		const mainscreen = this.hasScreen ? this._screenvideo : this._videovideo;
 		const peerscreen = this.hasScreen ? this._videovideo : null;
 
-		this._canvas.width = mainscreen.videoWidth;
-		this._canvas.height = mainscreen.videoHeight;
+		if(mainscreen) {
+			this._canvas.width = mainscreen.videoWidth;
+			this._canvas.height = mainscreen.videoHeight;
+		}
 		this._ctx.fillStyle = '#BBBBBB';
 		this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
 
