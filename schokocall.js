@@ -77,6 +77,7 @@ class SchokoCall {
 
 	async _getInitialOptions(opts) {
 		this._media = await SchokoMedia.init(opts);
+		this._display.videomuted = !this._media.hasVideo;
 
 		const localStream = new MediaStream();
 		this._media.stream.getVideoTracks().forEach((track) => {
