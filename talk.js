@@ -110,6 +110,12 @@ window.addEventListener('load', () => {
 		}
 	};
 
+	if(localStorage.getItem('username') == null) {
+		location.href = '/login.html';
+		return;
+	}
+	const username = localStorage.getItem('username');
+	const password = localStorage.getItem('password');
 	ua = new SchokoUA(username, password, uadisplay);
 
 	call.addEventListener('click', () => {

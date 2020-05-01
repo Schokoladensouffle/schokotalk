@@ -1,0 +1,62 @@
+body {
+	background-color: #18f;
+	color: white;
+}
+
+hgroup {
+	text-align: center;
+	margin-top: 3em;
+}
+
+fieldset {
+	border-radius: 1em;
+	width: 30em;
+	margin: 3em auto;
+	padding: 2em 8em;
+	box-sizing: border-box;
+}
+
+input {
+	font-size: 1.2em;
+	padding: 0.5em;
+	margin: 0;
+	width: 100%;
+	border: none;
+}
+
+#user {
+	border-top-left-radius: 0.2em;
+	border-top-right-radius: 0.2em;
+	border-bottom: 1px solid #ccc;
+}
+
+#pass {
+	border-bottom-left-radius: 0.2em;
+	border-bottom-right-radius: 0.2em;
+}
+
+button {
+	width: 100%;
+	border: none;
+	border-radius: 1em;
+	margin: 0;
+	padding: 1em;
+	background-color: #06d;
+	border: 2px solid #05c;
+	color: white;
+}
+
+button:hover {
+	opacity: 0.75;
+}
+
+#login {
+	margin-top: 2em;
+}
+
+@media (max-width: 30em) {
+	fieldset {
+		width: 100%;
+		padding: 2em;
+	}
+}
