@@ -1,6 +1,9 @@
 body {
 	background-color: #18f;
 	color: white;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 hgroup {

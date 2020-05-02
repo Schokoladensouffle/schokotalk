@@ -1,8 +1,9 @@
-/*background-color: #903b00;*/
-
 body {
 	overflow: hidden;
 	background-color: #333;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 audio {
