@@ -25,7 +25,8 @@ window.addEventListener('load', () => {
 		accept: call,
 		acceptaudio: callaudio,
 		decline: hangup,
-		ringer: number
+		ringer: number,
+		keypad: keypad
 	});
 
 	const uadisplay = new UADisplay(null, calldisplay, {

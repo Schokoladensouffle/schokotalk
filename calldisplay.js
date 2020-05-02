@@ -13,6 +13,7 @@ class CallDisplay {
 		this._acceptaudio = opts.acceptaudio;
 		this._decline = opts.decline;
 		this._ringer = opts.ringer;
+		this._keypad = opts.keypad;
 
 		this._audiomute.addEventListener('click', (event) => {
 			this._onaudiomute(event);
@@ -31,6 +32,11 @@ class CallDisplay {
 		});
 		this._decline.addEventListener('click', (event) => {
 			this._ondecline(event);
+		});
+		this._keypad.querySelectorAll('[data-dtmf]').forEach((key) => {
+			key.addEventListener('click', (event) => {
+				this._onkeypress(event);
+			});
 		});
 
 		this.session = session;
@@ -69,6 +75,11 @@ class CallDisplay {
 		} else {
 			this._session.hangup();
 		}
+	}
+
+	_onkeypress(event) {
+		if(this._session == null) return;
+		this._session.dtmf(event.target.getAttribute('data-dtmf'));
 	}
 
 	set session(session) {
