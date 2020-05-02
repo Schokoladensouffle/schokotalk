@@ -107,26 +107,18 @@ class SchokoCall {
 		this._session.terminate();
 	}
 
-	muteaudio() {
-		this._session.mute({ audio: true });
-		this._display.audiomuted = true;
+	set audiomuted(val) {
+		if(val) {
+			this._session.mute({ audio: true });
+		} else {
+			this._session.unmute({ audio: true });
+		}
+		this._display.audiomuted = val;
 	}
 
-	unmuteaudio() {
-		this._session.unmute({ audio: true });
-		this._display.audiomuted = false;
-	}
-
-	mutevideo() {
-		this._media.video = false;
-		// this._session.mute({ video: true });
-		this._display.videomuted = true;
-	}
-
-	unmutevideo() {
-		this._media.video = true;
-		// this._session.unmute({ video: true });
-		this._display.videomuted = false;
+	set videomuted(val) {
+		this._media.video = !val;
+		this._display.videomuted = val;
 	}
 
 	sharedisplay() {

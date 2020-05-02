@@ -24,11 +24,7 @@ window.addEventListener('load', () => {
 	mutie = document.getElementById('mutie');
 	vimutie = document.getElementById('vimutie');
 
-	var muted = false;
-	var vimuted = false;
-
-
-	const calldisplay = new CallDisplay({
+	const calldisplay = new CallDisplay(null, {
 		audiomute: mutie,
 		videomute: vimutie,
 		screenshare: screenie,
@@ -46,22 +42,7 @@ window.addEventListener('load', () => {
 			number.disabled = hasit;
 			call.disabled = hasit;
 			vicall.disabled = hasit;
-			screenie.disabled = !hasit;
-			mutie.disabled = !hasit;
-			vimutie.disabled = !hasit;
-
-			if(!hasit) {
-				screenie.classList.remove('isshared');
-				mutie.classList.remove('ismuted');
-				vimutie.classList.remove('ismuted');
-				remoteaudio.srcObject = null;
-				remotevideo.srcObject = null;
-				local.srcObject = null;
-				while(sfu.firstChild) sfu.firstChild.remove();
-
-				muted = false;
-				vimuted = false;
-			}
+			this.calldisplay.session = hasit ? ua.session : null;
 		}
 	};
 
@@ -92,24 +73,6 @@ window.addEventListener('load', () => {
 			number.value = '';
 		} else {
 			ua.session.hangup();
-		}
-	});
-
-	mutie.addEventListener('click', () => {
-		muted = !muted;
-		if(muted) {
-			ua.session.muteaudio();
-		} else {
-			ua.session.unmuteaudio();
-		}
-	});
-
-	vimutie.addEventListener('click', () => {
-		vimuted = !vimuted;
-		if(vimuted) {
-			ua.session.mutevideo();
-		} else {
-			ua.session.unmutevideo();
 		}
 	});
 
