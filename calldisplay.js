@@ -123,7 +123,7 @@ class CallDisplay {
 				video.remove();
 			}
 		});
-		if((!this._remotevideo.srcObject || this._remotevideo.srcObject.getTrackById(trackid)) && this._sfu.children.lastChild) {
+		if((!this._remotevideo.srcObject || this._remotevideo.srcObject.getTrackById(trackid)) && this._sfu.lastChild) {
 			this._mainvideo = this._sfu.lastChild;
 		}
 	}
