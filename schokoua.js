@@ -48,17 +48,10 @@ class SchokoUA {
 			return;
 		}
 
-		let session = new SchokoCall(event.session, this._display.calldisplay, this);
-
-		if(this.session) {
-			session.decline();
-			return;
+		const calldisplay = this._display.calldisplay;
+		if(calldisplay) {
+			this._session = new SchokoCall(event.session, calldisplay, this);
 		}
-
-		this._session = session;
-		session.answer();
-
-		this._display.hasSession = true;
 	}
 
 	initiateCall(number, opts) {

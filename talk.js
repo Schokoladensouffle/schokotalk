@@ -31,18 +31,16 @@ window.addEventListener('load', () => {
 		remoteaudio: remoteaudio,
 		remotevideo: remotevideo,
 		localvideo: local,
-		sfu: sfu
+		sfu: sfu,
+		accept: vicall,
+		acceptaudio: call,
+		decline: hangup,
+		ringer: number
 	});
 
 	const uadisplay = {
 		get calldisplay() {
 			return calldisplay;
-		},
-		set hasSession(hasit) {
-			number.disabled = hasit;
-			call.disabled = hasit;
-			vicall.disabled = hasit;
-			this.calldisplay.session = hasit ? ua.session : null;
 		}
 	};
 
@@ -56,14 +54,14 @@ window.addEventListener('load', () => {
 	ua = new SchokoUA(exten, username, password, uadisplay);
 
 	call.addEventListener('click', () => {
-		if(number.value) {
+		if(number.value && !number.disabled) {
 			vimuted = true;
 			ua.initiateCall(number.value, { audio: true });
 		}
 	});
 
 	vicall.addEventListener('click', () => {
-		if(number.value) {
+		if(number.value && !number.disabled) {
 			ua.initiateCall(number.value);
 		}
 	});
@@ -71,8 +69,6 @@ window.addEventListener('load', () => {
 	hangup.addEventListener('click', () => {
 		if(ua.session == null) {
 			number.value = '';
-		} else {
-			ua.session.hangup();
 		}
 	});
 

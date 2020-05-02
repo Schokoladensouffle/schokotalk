@@ -77,6 +77,23 @@ video {
 	letter-spacing: 0.25em;
 	text-align: center;
 	box-sizing: border-box;
+	padding: 1px;
+}
+
+@keyframes blink {
+	from { color: red; }
+	50% { color: red; }
+	50.001% { color: transparent; }
+	to { color: transparent; }
+}
+#number.ringing {
+	color: red;
+	font-size: 1.5em;
+	letter-spacing: initial;
+	padding: calc(0.75em - 1px) 0;
+	animation-name: blink;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
 }
 
 #toolbox {
@@ -166,7 +183,7 @@ video {
 #mutie.ismuted, #vimutie.ismuted {
 	background-color: #fff;
 }
-#mutie::after { content: "\01F507"; }
+#mutie::after { content: "\01F399"; }
 #vimutie::after { content: "\01F3A5"; }
 
 #keypad {

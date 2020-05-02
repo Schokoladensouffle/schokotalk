@@ -2,25 +2,33 @@ class SchokoCall {
 	constructor(session, display, ua, opts) {
 		opts = opts || {};
 
+		this._display = display;
+		this._display.session = this;
+		this._ua = ua;
+		this._media = null;
+
 		this._session = session;
 		if(this._session && this.direction == "incoming") {
 			for(const type in this._eventHandlers) {
 				const handler = this._eventHandlers[type];
 				this._session.on(type, handler);
 			}
+			this._display.ringing = true;
 		}
-
-		this._display = display;
-		this._ua = ua;
-		this._media = null;
 	}
 
 	get _eventHandlers() {
 		return {
+			confirmed: (event) => {
+				this._onconfirmed(event);
+			},
 			peerconnection: (event) => {
 				this._onpeerconnection(event);
 			},
 			ended: (event) => {
+				this._onended(event);
+			},
+			failed: (event) => {
 				this._onended(event);
 			}
 		}
@@ -31,6 +39,11 @@ class SchokoCall {
 			return '';
 		}
 		return this._session.direction;
+	}
+
+	_onconfirmed(event) {
+		this._display.ringing = false;
+		this._display.established = true;
 	}
 
 	_onpeerconnectionaddtrack(event) {
@@ -72,6 +85,7 @@ class SchokoCall {
 		if(this._media) {
 			this._media.stop();
 		}
+		this._display.session = null;
 		this._ua.onsessionend(this);
 	}
 
@@ -88,6 +102,18 @@ class SchokoCall {
 		let options = {};
 		options.mediaStream = this._media.stream;
 		return options;
+	}
+
+	get ringing() {
+		return this._session.isInProgress();
+	}
+
+	get established() {
+		return this._session.isEstablished();
+	}
+
+	get exten() {
+		return this._session.remote_identity.uri.user;
 	}
 
 	answer(opts) {

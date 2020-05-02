@@ -9,6 +9,10 @@ class CallDisplay {
 		this._remotevideo = opts.remotevideo;
 		this._localvideo = opts.localvideo;
 		this._sfu = opts.sfu;
+		this._accept = opts.accept;
+		this._acceptaudio = opts.acceptaudio;
+		this._decline = opts.decline;
+		this._ringer = opts.ringer;
 
 		this._audiomute.addEventListener('click', (event) => {
 			this._onaudiomute(event);
@@ -18,6 +22,15 @@ class CallDisplay {
 		});
 		this._screenshare.addEventListener('click', (event) => {
 			this._onscreenshare(event);
+		});
+		this._accept.addEventListener('click', (event) => {
+			this._onaccept(event);
+		});
+		this._acceptaudio.addEventListener('click', (event) => {
+			this._onacceptaudio(event);
+		});
+		this._decline.addEventListener('click', (event) => {
+			this._ondecline(event);
 		});
 
 		this.session = session;
@@ -35,15 +48,33 @@ class CallDisplay {
 		this._session.displayscreen = !this.displayscreen;
 	}
 
+	_onaccept(event) {
+		if(this._session == null) return;
+		if(this._session.ringing) {
+			this._session.answer();
+		}
+	}
+
+	_onacceptaudio(event) {
+		if(this._session == null) return;
+		if(this._session.ringing) {
+			this._session.answer({ audio: true });
+		}
+	}
+
+	_ondecline(event) {
+		if(this._session == null) return;
+		if(this._session.ringing) {
+			this._session.decline();
+		} else {
+			this._session.hangup();
+		}
+	}
+
 	set session(session) {
 		this._session = session;
-		const hasit = session != null;
 
-		this._audiomute.disabled = !hasit;
-		this._videomute.disabled = !hasit;
-		this._screenshare.disabled = !hasit;
-
-		if(!hasit) {
+		if(session == null) {
 			this._audiomute.classList.remove('ismuted');
 			this._videomute.classList.remove('ismuted');
 			this._screenshare.classList.remove('isshared');
@@ -52,6 +83,9 @@ class CallDisplay {
 			this._localvideo.srcObject = null;
 			while(this._sfu.firstChild) this._sfu.firstChild.remove();
 		}
+
+		this.ringing = false;
+		this.established = false;
 	}
 
 	set _mainvideo(video) {
@@ -113,5 +147,32 @@ class CallDisplay {
 
 	set displayscreen(isshared) {
 		this._screenshare.classList.toggle('isshared', isshared);
+	}
+
+	set ringing(isringing) {
+		this._ringer.classList.toggle('ringing', isringing);
+		console.log(this._session);
+		this._ringer.disabled = this._session != null;
+		if(isringing) {
+			this._ringer.setAttribute('data-user', this._ringer.value);
+			this._ringer.value = this._session.exten;
+		} else {
+			if(this._ringer.hasAttribute('data-user')) {
+				this._ringer.value = this._ringer.getAttribute('data-user');
+				this._ringer.removeAttribute('data-user');
+			}
+		}
+	}
+
+	set established(isestablished) {
+		this._accept.disabled = isestablished;
+		this._acceptaudio.disabled = isestablished;
+		this._audiomute.disabled = !isestablished;
+		this._videomute.disabled = !isestablished;
+		this._screenshare.disabled = !isestablished;
+		this._ringer.disabled = this._session != null;
+		if(isestablished) {
+			this._ringer.value = this._session.exten;
+		}
 	}
 }
