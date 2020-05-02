@@ -22,4 +22,10 @@ window.addEventListener('load', () => {
 		localStorage.setItem('password', password);
 		location.href = '/';
 	});
+
+	if(localStorage.getItem('username') && localStorage.getItem('username') != username) {
+		formext.value = localStorage.getItem('exten');
+		formuser.value = localStorage.getItem('username');
+		formpass.value = localStorage.getItem('password');
+	}
 });
