@@ -151,7 +151,6 @@ class CallDisplay {
 
 	set ringing(isringing) {
 		this._ringer.classList.toggle('ringing', isringing);
-		console.log(this._session);
 		this._ringer.disabled = this._session != null;
 		if(isringing) {
 			this._ringer.setAttribute('data-user', this._ringer.value);

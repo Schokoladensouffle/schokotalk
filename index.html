@@ -10,23 +10,24 @@
 		<script src="schokocall.js"></script>
 		<script src="schokoua.js"></script>
 		<script src="calldisplay.js"></script>
+		<script src="uadisplay.js"></script>
 		<script src="talk.js"></script>
 	</head>
 	<body>
-		<audio id="remote" playsinline autoplay></audio>
-		<video id="remotemain" muted playsinline autoplay></video>
+		<audio id="remoteaudio" playsinline autoplay></audio>
+		<video id="remotevideo" muted playsinline autoplay></video>
 		<div id="sfu"></div>
-		<video id="local" muted playsinline autoplay></video>
+		<video id="localvideo" muted playsinline autoplay></video>
 		<div id="control">
 			<div id="field">
 				<input type="tel" id="number" pattern="[0-9*#]{1,}" size="4" maxlength="4" />
 				<div id="toolbox">
-					<button id="call">anrufen</button>
-					<button id="vicall">Videoanruf</button>
+					<button id="callaudio">anrufen</button>
+					<button id="call">Videoanruf</button>
 					<button id="hangup">auflegen</button>
-					<button id="screenie">Screensharing</button>
-					<button id="mutie">Mute</button>
-					<button id="vimutie">Video</button>
+					<button id="screenshare">Screensharing</button>
+					<button id="audiomute">Mute</button>
+					<button id="videomute">Video</button>
 				</div>
 			</div>
 			<div id="keypad">

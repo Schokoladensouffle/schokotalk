@@ -12,7 +12,7 @@ video {
 	background-color: black;
 }
 
-#remotemain {
+#remotevideo {
 	position: absolute;
 	top: 1em;
 	left: 1em;
@@ -21,7 +21,7 @@ video {
 	background-color: #333;
 }
 
-#local {
+#localvideo {
 	position: absolute;
 	bottom: 1em;
 	right: calc(20% + 2em);
@@ -142,17 +142,19 @@ video {
 	font-size: 1.2rem;
 }
 
+#callaudio {
+	background-color: #0f0;
+	border-color: #090;
+}
+#callaudio::after {
+	content: "\01F4DE";
+}
+
 #call {
 	background-color: #0f0;
 	border-color: #090;
 }
-#call::after { content: "\01F4DE"; }
-
-#vicall {
-	background-color: #0f0;
-	border-color: #090;
-}
-#toolbox #vicall::after {
+#toolbox #call::after {
 	content: "\01F4DE\01F3A5";
 	font-size: 1rem;
 }
@@ -162,29 +164,37 @@ video {
 	border-color: #900;
 	transform: rotate(135deg);
 }
-#hangup::after { content: "\01F4DE"; }
+#hangup::after {
+	content: "\01F4DE";
+}
 
-#screenie {
+#screenshare {
 	background-color: #fff;
 	border-color: #009;
 	color: #000;
 }
-#screenie.isshared {
+#screenshare.isshared {
 	background-color: #00f;
 	color: #fff;
 }
-#screenie::after { content: "\01F5B5"; }
+#screenshare::after {
+	content: "\01F5B5";
+}
 
-#mutie, #vimutie {
+#audiomute, #videomute {
 	background-color: #ff0;
 	border-color: #990;
 	color: #fff;
 }
-#mutie.ismuted, #vimutie.ismuted {
+#audiomute.ismuted, #videomute.ismuted {
 	background-color: #fff;
 }
-#mutie::after { content: "\01F399"; }
-#vimutie::after { content: "\01F3A5"; }
+#audiomute::after {
+	content: "\01F399";
+}
+#videomute::after {
+	content: "\01F3A5";
+}
 
 #keypad {
 	display: grid;
@@ -247,12 +257,12 @@ video {
 	#control {
 		right: 0;
 	}
-	#local {
+	#localvideo {
 		width: calc(20% - 1em);
 		height: auto;
 		right: 0.5em;
 	}
-	#remotemain {
+	#remotevideo {
 		width: calc(100% - 2em);
 		height: calc(100% - 17em);
 	}

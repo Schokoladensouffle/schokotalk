@@ -1,48 +1,40 @@
 var ua = null;
-var remoteaudio;
-var remotevideo;
-var local;
-var sfu;
-var number;
-var call;
-var vicall;
-var hangup;
-var screenie;
-var mutie;
-var vimutie;
 
 window.addEventListener('load', () => {
-	remoteaudio = document.getElementById('remote');
-	remotevideo = document.getElementById('remotemain');
-	local = document.getElementById('local');
-	sfu = document.getElementById('sfu');
-	number = document.getElementById('number');
-	call = document.getElementById('call');
-	vicall = document.getElementById('vicall');
-	hangup = document.getElementById('hangup');
-	screenie = document.getElementById('screenie');
-	mutie = document.getElementById('mutie');
-	vimutie = document.getElementById('vimutie');
+	var remoteaudio = document.getElementById('remoteaudio');
+	var remotevideo = document.getElementById('remotevideo');
+	var localvideo = document.getElementById('localvideo');
+	var sfu = document.getElementById('sfu');
+	var number = document.getElementById('number');
+	var callaudio = document.getElementById('callaudio');
+	var call = document.getElementById('call');
+	var hangup = document.getElementById('hangup');
+	var audiomute = document.getElementById('audiomute');
+	var videomute = document.getElementById('videomute');
+	var screenshare = document.getElementById('screenshare');
+	var keypad = document.getElementById('keypad');
 
 	const calldisplay = new CallDisplay(null, {
-		audiomute: mutie,
-		videomute: vimutie,
-		screenshare: screenie,
+		audiomute: audiomute,
+		videomute: videomute,
+		screenshare: screenshare,
 		remoteaudio: remoteaudio,
 		remotevideo: remotevideo,
-		localvideo: local,
+		localvideo: localvideo,
 		sfu: sfu,
-		accept: vicall,
-		acceptaudio: call,
+		accept: call,
+		acceptaudio: callaudio,
 		decline: hangup,
 		ringer: number
 	});
 
-	const uadisplay = {
-		get calldisplay() {
-			return calldisplay;
-		}
-	};
+	const uadisplay = new UADisplay(null, calldisplay, {
+		dial: call,
+		dialaudio: callaudio,
+		abort: hangup,
+		number: number,
+		keypad: keypad
+	});
 
 	if(localStorage.getItem('username') == null) {
 		location.href = '/login.html';
@@ -53,50 +45,5 @@ window.addEventListener('load', () => {
 	const password = localStorage.getItem('password');
 	ua = new SchokoUA(exten, username, password, uadisplay);
 
-	call.addEventListener('click', () => {
-		if(number.value && !number.disabled) {
-			vimuted = true;
-			ua.initiateCall(number.value, { audio: true });
-		}
-	});
-
-	vicall.addEventListener('click', () => {
-		if(number.value && !number.disabled) {
-			ua.initiateCall(number.value);
-		}
-	});
-
-	hangup.addEventListener('click', () => {
-		if(ua.session == null) {
-			number.value = '';
-		}
-	});
-
-	screenie.addEventListener('click', () => {
-		ua.session.sharedisplay();
-	});
-
-	function checkNumber() {
-		number.value = number.value.replace(/[^0-9*#]/gi, '').substr(0, 4);
-		call.disabled = number.value == '';
-		vicall.disabled = number.value == '';
-	}
-
-	number.addEventListener('input', checkNumber);
-
-	document.getElementById('keypad').querySelectorAll('[data-dtmf]').forEach((key) => {
-		key.addEventListener('click', (event) => {
-			const digit = event.target.getAttribute("data-dtmf");
-			if(ua.session == null) {
-				number.value += digit;
-				checkNumber();
-			} else {
-				ua.session.dtmf(digit);
-			}
-		});
-	});
-
-	number.value = "7001";
-	checkNumber();
-	uadisplay.hasSession = false;
+	uadisplay.exten = '7001';
 });

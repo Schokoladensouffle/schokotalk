@@ -24,6 +24,7 @@ class SchokoUA {
 
 		this._session = null;
 		this._display = display;
+		this._display.ua = this;
 	}
 
 	_onregistrationfailed(event) {
