@@ -35,10 +35,12 @@ class SchokoCall {
 
 	_onpeerconnectionaddtrack(event) {
 		const track = event.track;
+		track.onended = (event) => {
+			this._onpeerconnectionremovetrack(event);
+		};
 
 		const stream = new MediaStream();
 		stream.addTrack(track);
-		console.log(track);
 
 		if(track.kind == "video") {
 			this._display.video = stream;
@@ -48,16 +50,14 @@ class SchokoCall {
 	}
 
 	_onpeerconnectionremovetrack(event) {
-		console.warn(event);
+		const track = event.target;
+		this._display.videoremove = track.id;
 	}
 
 	_onpeerconnection(event) {
 		const pc = event.peerconnection;
 		pc.ontrack = (event) => {
 			this._onpeerconnectionaddtrack(event);
-		};
-		pc.onremovetrack = (event) => {
-			this._onpeerconnectionremovetrack(event);
 		};
 		pc.getReceivers().forEach((receiver) => {
 			if(receiver.track) {

@@ -27,61 +27,16 @@ window.addEventListener('load', () => {
 	var muted = false;
 	var vimuted = false;
 
-	function updateRemote(video) {
-		remotevideo.srcObject = video.srcObject;
-	}
-	function freshRemote(video) {
-		if(remotemain.srcObject && remotemain.srcObject.getTracks()[0].readyState != "ended") {
-			return;
-		}
-		if(video) {
-			updateRemote(video);
-		} else {
-			remotemain.srcObject = null;
-		}
-	}
 
-	const calldisplay = {
-		set video(stream) {
-			const vid = document.createElement('video');
-			vid.autoplay = true;
-			vid.muted = true;
-			vid.playsInline = true;
-			vid.classList.add('sfu');
-			vid.srcObject = stream;
-			vid.addEventListener('click', (event) => {
-				updateRemote(event.target);
-			});
-			sfu.appendChild(vid);
-		},
-		set localvideo(stream) {
-			local.srcObject = stream;
-		},
-		set audio(stream) {
-			remoteaudio.srcObject = stream;
-		},
-		set audiomuted(ismuted) {
-			if(ismuted) {
-				mutie.classList.add('ismuted');
-			} else {
-				mutie.classList.remove('ismuted');
-			}
-		},
-		set videomuted(ismuted) {
-			if(ismuted) {
-				vimutie.classList.add('ismuted');
-			} else {
-				vimutie.classList.remove('ismuted');
-			}
-		},
-		set displayscreen(isshared) {
-			if(isshared) {
-				screenie.classList.add('isshared');
-			} else {
-				screenie.classList.remove('isshared');
-			}
-		}
-	};
+	const calldisplay = new CallDisplay({
+		audiomute: mutie,
+		videomute: vimutie,
+		screenshare: screenie,
+		remoteaudio: remoteaudio,
+		remotevideo: remotevideo,
+		localvideo: local,
+		sfu: sfu
+	});
 
 	const uadisplay = {
 		get calldisplay() {
