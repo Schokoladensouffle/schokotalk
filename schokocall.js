@@ -86,7 +86,6 @@ class SchokoCall {
 			this._media.stop();
 		}
 		this._display.session = null;
-		this._ua.onsessionend(this);
 	}
 
 	async _getInitialOptions(opts) {

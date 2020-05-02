@@ -73,6 +73,10 @@ class UADisplay {
 	}
 
 	get calldisplay() {
+		if(this._calldisplay.session) {
+			return null;
+		}
+
 		return this._calldisplay;
 	}
 }

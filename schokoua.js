@@ -22,7 +22,6 @@ class SchokoUA {
 		});
 		this._ua.start();
 
-		this._session = null;
 		this._display = display;
 		this._display.ua = this;
 	}
@@ -34,16 +33,6 @@ class SchokoUA {
 		}
 	}
 
-	get session() {
-		return this._session;
-	}
-
-	onsessionend(session) {
-		if(session._session._id != this._session._session._id) throw "Wrong session";
-		this._session = null;
-		this._display.hasSession = false;
-	}
-
 	_onsession(event) {
 		if(event.session.direction == "outgoing") {
 			return;
@@ -51,13 +40,16 @@ class SchokoUA {
 
 		const calldisplay = this._display.calldisplay;
 		if(calldisplay) {
-			this._session = new SchokoCall(event.session, calldisplay, this);
+			new SchokoCall(event.session, calldisplay, this);
+		} else {
+			new SchokoCall(event.session, {}, this).decline();
 		}
 	}
 
 	initiateCall(number, opts) {
-		this._session = SchokoCall.init(this, number, this._display.calldisplay, opts);
-		this._display.hasSession = true;
-		this._session._display.videomuted = true;
+		const calldisplay = this._display.calldisplay;
+		if(calldisplay) {
+			SchokoCall.init(this, number, calldisplay, opts);
+		}
 	}
 }

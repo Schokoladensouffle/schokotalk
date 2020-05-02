@@ -99,6 +99,10 @@ class CallDisplay {
 		this.established = false;
 	}
 
+	get session() {
+		return this._session != null;
+	}
+
 	set _mainvideo(video) {
 		this._remotevideo.srcObject = video.srcObject;
 	}
