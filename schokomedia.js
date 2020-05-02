@@ -77,7 +77,7 @@ class SchokoMedia {
 	_render() {
 		const screenvideo = { video: this._screenvideo };
 		const videovideo = { video: this._videovideo, transform: true };
-		const mainscreen = this.hasScreen ? screenvideo : videovideo;
+		const mainscreen = this.hasScreen ? screenvideo : (this.hasVideo ? videovideo : null);
 		const peerscreen = this.hasScreen ? videovideo : null;
 
 		if(mainscreen) {
