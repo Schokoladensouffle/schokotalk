@@ -38,14 +38,21 @@ class UADisplay {
 		this._number.value = exten.replace(/[^0-9*#]/gi, '').substr(0, 4);
 	}
 
+	get _forceexten() {
+		if(this.exten === '') {
+			this.exten = this._number.placeholder;
+		}
+		return this.exten;
+	}
+
 	_ondial(event) {
-		if(this.exten) {
+		if(this._forceexten) {
 			this._ua.initiateCall(this.exten);
 		}
 	}
 
 	_ondialaudio(event) {
-		if(this.exten) {
+		if(this._forceexten) {
 			this._ua.initiateCall(this.exten, { audio: true });
 		}
 	}

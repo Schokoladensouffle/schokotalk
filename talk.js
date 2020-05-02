@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
 	var videomute = document.getElementById('videomute');
 	var screenshare = document.getElementById('screenshare');
 	var keypad = document.getElementById('keypad');
+	var phonebook = document.getElementById('phonebook');
 
 	const calldisplay = new CallDisplay(null, {
 		audiomute: audiomute,
@@ -26,7 +27,8 @@ window.addEventListener('load', () => {
 		acceptaudio: callaudio,
 		decline: hangup,
 		ringer: number,
-		keypad: keypad
+		keypad: keypad,
+		phonebook: phonebook
 	});
 
 	const uadisplay = new UADisplay(null, calldisplay, {
@@ -45,6 +47,4 @@ window.addEventListener('load', () => {
 	const username = localStorage.getItem('username');
 	const password = localStorage.getItem('password');
 	ua = new SchokoUA(exten, username, password, uadisplay);
-
-	uadisplay.exten = '7001';
 });

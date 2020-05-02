@@ -14,6 +14,7 @@ class CallDisplay {
 		this._decline = opts.decline;
 		this._ringer = opts.ringer;
 		this._keypad = opts.keypad;
+		this._phonebook = opts.phonebook;
 
 		this._audiomute.addEventListener('click', (event) => {
 			this._onaudiomute(event);
@@ -167,6 +168,7 @@ class CallDisplay {
 	set ringing(isringing) {
 		this._ringer.classList.toggle('ringing', isringing);
 		this._ringer.disabled = this._session != null;
+		this._phonebook.classList.toggle('hidden', this._session != null);
 		if(isringing) {
 			this._ringer.setAttribute('data-user', this._ringer.value);
 			this._ringer.value = this._session.exten;
@@ -185,6 +187,7 @@ class CallDisplay {
 		this._videomute.disabled = !isestablished;
 		this._screenshare.disabled = !isestablished;
 		this._ringer.disabled = this._session != null;
+		this._phonebook.classList.toggle('hidden', this._session != null);
 		if(isestablished) {
 			this._ringer.value = this._session.exten;
 		}
