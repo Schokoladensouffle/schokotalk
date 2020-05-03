@@ -78,7 +78,7 @@ class SchokoMedia {
 		const screenvideo = { video: this._screenvideo };
 		const videovideo = { video: this._videovideo, transform: true };
 		const mainscreen = this.hasScreen ? screenvideo : (this.hasVideo ? videovideo : null);
-		const peerscreen = this.hasScreen ? videovideo : null;
+		const peerscreen = this.hasScreen ? (this.hasVideo ? videovideo : null) : null;
 
 		if(mainscreen) {
 			this._canvas.width = mainscreen.video.videoWidth;
