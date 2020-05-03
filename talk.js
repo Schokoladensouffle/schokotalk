@@ -47,6 +47,37 @@ window.addEventListener('load', () => {
 		});
 	});
 
+	document.addEventListener('keydown', (event) => {
+		const digit = event.key;
+		if(digit.match(/^[0-9*#]$/)) {
+			if(uadisplay.exten === null) {
+				calldisplay.dtmf(digit);
+			} else {
+				uadisplay.exten += digit;
+			}
+		} else if(digit == "Enter") {
+			if(uadisplay.exten === null) {
+				if(event.shiftKey) {
+					calldisplay.acceptaudio();
+				} else {
+					calldisplay.accept();
+				}
+			} else {
+				if(event.shiftKey) {
+					uadisplay.dialaudio();
+				} else {
+					uadisplay.dial();
+				}
+			}
+		} else if(digit == "Escape") {
+			if(uadisplay.exten === null) {
+				calldisplay.hangup();
+			} else {
+				uadisplay.exten = '';
+			}
+		}
+	});
+
 	if(localStorage.getItem('username') == null) {
 		location.href = '/login.html';
 		return;

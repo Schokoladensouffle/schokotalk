@@ -27,17 +27,17 @@ class CallDisplay {
 			this._onscreenshare(event);
 		});
 		this._accept.addEventListener('click', (event) => {
-			this._onaccept(event);
+			this.accept();
 		});
 		this._acceptaudio.addEventListener('click', (event) => {
-			this._onacceptaudio(event);
+			this.acceptaudio();
 		});
 		this._decline.addEventListener('click', (event) => {
-			this._ondecline(event);
+			this.hangup();
 		});
 		this._keypad.querySelectorAll('[data-dtmf]').forEach((key) => {
 			key.addEventListener('click', (event) => {
-				this._onkeypress(event);
+				this.dtmf(event.target.getAttribute('data-dtmf'));
 			});
 		});
 
@@ -56,21 +56,21 @@ class CallDisplay {
 		this._session.displayscreen = !this.displayscreen;
 	}
 
-	_onaccept(event) {
+	accept() {
 		if(this._session == null) return;
 		if(this._session.ringing) {
 			this._session.answer();
 		}
 	}
 
-	_onacceptaudio(event) {
+	acceptaudio() {
 		if(this._session == null) return;
 		if(this._session.ringing) {
 			this._session.answer({ audio: true });
 		}
 	}
 
-	_ondecline(event) {
+	hangup() {
 		if(this._session == null) return;
 		if(this._session.ringing) {
 			this._session.decline();
@@ -79,9 +79,9 @@ class CallDisplay {
 		}
 	}
 
-	_onkeypress(event) {
+	dtmf(digit) {
 		if(this._session == null) return;
-		this._session.dtmf(event.target.getAttribute('data-dtmf'));
+		this._session.dtmf(digit);
 	}
 
 	set session(session) {

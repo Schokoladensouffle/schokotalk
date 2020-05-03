@@ -9,10 +9,10 @@ class UADisplay {
 		this._keypad = opts.keypad;
 
 		this._dial.addEventListener('click', (event) => {
-			this._ondial(event);
+			this.dial();
 		});
 		this._dialaudio.addEventListener('click', (event) => {
-			this._ondialaudio(event);
+			this.dialaudio();
 		});
 		this._abort.addEventListener('click', (event) => {
 			this._onabort(event);
@@ -47,13 +47,13 @@ class UADisplay {
 		return this.exten;
 	}
 
-	_ondial(event) {
+	dial() {
 		if(this._forceexten) {
 			this._ua.initiateCall(this.exten);
 		}
 	}
 
-	_ondialaudio(event) {
+	dialaudio() {
 		if(this._forceexten) {
 			this._ua.initiateCall(this.exten, { audio: true });
 		}
