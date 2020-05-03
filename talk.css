@@ -47,7 +47,7 @@ video {
 	display: initial;
 }
 
-#phonebook a {
+#phonebook a[href] {
 	text-decoration: none;
 	color: white;
 	border: 1px solid white;
@@ -59,9 +59,13 @@ video {
 	transition-duration: 0.3s;
 }
 
-#phonebook a:hover {
+#phonebook a[href]:hover {
 	color: #333;
 	background-color: white;
+}
+
+#phonebook a[data-fastnumber] {
+	cursor: pointer;
 }
 
 #phonebook dl {

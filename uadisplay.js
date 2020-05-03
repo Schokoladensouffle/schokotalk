@@ -35,7 +35,9 @@ class UADisplay {
 	}
 
 	set exten(exten) {
-		this._number.value = exten.replace(/[^0-9*#]/gi, '').substr(0, 4);
+		if(!this._number.disabled) {
+			this._number.value = exten.replace(/[^0-9*#]/gi, '').substr(0, 4);
+		}
 	}
 
 	get _forceexten() {

@@ -39,6 +39,12 @@ window.addEventListener('load', () => {
 		keypad: keypad
 	});
 
+	document.querySelectorAll('a[data-fastnumber]').forEach((link) => {
+		link.addEventListener('click', (event) => {
+			uadisplay.exten = event.target.getAttribute('data-fastnumber');
+		});
+	});
+
 	if(localStorage.getItem('username') == null) {
 		location.href = '/login.html';
 		return;
