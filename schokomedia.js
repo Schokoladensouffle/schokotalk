@@ -27,7 +27,7 @@ class SchokoMedia {
 
 		this._update = window.setInterval(() => {
 			this._render();
-		}, 1000/30);
+		}, 1000/50);
 	}
 
 	createVideoElement(track) {
