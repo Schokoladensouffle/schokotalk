@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="de">
 	<head>
 		<title>Schokoladensouffle Talk</title>
 		<meta charset="utf-8" />
@@ -13,19 +13,23 @@
 			<h1>Schokoladensouffle Talk</h1>
 			<h2>Login</h2>
 		</hgroup>
-		<fieldset>
-			<input type="text" placeholder="Rufnummer" id="exten" size="4" maxlength="4" pattern="[0-9]{4}" />
-			<input type="text" placeholder="Benutzer" id="user" />
-			<input type="password" placeholder="Passwort" id="pass" />
-			<button id="login">anmelden</button>
-		</fieldset>
-		<fieldset>
-			<button id="anon">Ohne Anmeldung fortfahren</button>
-		</fieldset>
+		<form>
+			<fieldset>
+				<input type="text" autocomplete="tel-extension" placeholder="Rufnummer" id="exten" size="4" maxlength="4" pattern="[0-9]{4}" />
+				<input type="text" autocomplete="username" placeholder="Benutzer" id="user" />
+				<input type="password" autocomplete="current-password" placeholder="Passwort" id="pass" />
+				<button id="login">anmelden</button>
+			</fieldset>
+		</form>
+		<form>
+			<fieldset>
+				<button id="anon">Ohne Anmeldung fortfahren</button>
+			</fieldset>
+		</form>
 		<nav>
 			<ul>
-				<li><a target="_blank" href="//schokoladensouffle.eu/impressum">Impressum</a></li>
-				<li><a target="_blank" href="//schokoladensouffle.eu/datenschutz">Datenschutzerklärung</a></li>
+				<li><a target="_blank" rel="noopener" href="//schokoladensouffle.eu/impressum">Impressum</a></li>
+				<li><a target="_blank" rel="noopener" href="//schokoladensouffle.eu/datenschutz">Datenschutzerklärung</a></li>
 			</ul>
 		</nav>
 	</body>
