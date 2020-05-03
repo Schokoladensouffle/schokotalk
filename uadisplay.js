@@ -1,3 +1,5 @@
+export { UADisplay };
+
 class UADisplay {
 	constructor(ua, calldisplay, opts) {
 		opts = opts || {};

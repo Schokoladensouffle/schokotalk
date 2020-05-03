@@ -1,3 +1,7 @@
+import { CallDisplay } from './calldisplay.js';
+import { UADisplay } from './uadisplay.js';
+import { SchokoUA } from './schokoua.js';
+
 var ua = null;
 
 window.addEventListener('load', () => {

@@ -1,3 +1,6 @@
+import { SchokoMedia } from './schokomedia.js';
+export { SchokoCall };
+
 class SchokoCall {
 	constructor(session, display, ua, opts) {
 		opts = opts || {};

@@ -1,3 +1,6 @@
+import { SchokoCall } from './schokocall.js';
+export { SchokoUA };
+
 class SchokoUA {
 	constructor(exten, username, password, display, opts) {
 		opts = opts || {};

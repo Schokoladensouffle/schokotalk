@@ -1,3 +1,5 @@
+export { CallDisplay };
+
 class CallDisplay {
 	constructor(session, opts) {
 		opts = opts || {};

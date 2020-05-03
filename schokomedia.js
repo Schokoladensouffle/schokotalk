@@ -1,3 +1,5 @@
+export { SchokoMedia };
+
 class SchokoMedia {
 	constructor(stream) {
 		this._video = [];
