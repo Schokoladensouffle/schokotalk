@@ -146,14 +146,9 @@ class SchokoCall {
 		this._display.videomuted = val;
 	}
 
-	sharedisplay() {
-		if(this._media.hasScreen) {
-			this._media.screen = false;
-			this._display.displayscreen = false;
-		} else {
-			this._media.screen = true;
-			this._display.displayscreen = true;
-		}
+	set displayscreen(val) {
+		this._media.screen = val;
+		this._display.displayscreen = val;
 	}
 
 	dtmf(digit) {
