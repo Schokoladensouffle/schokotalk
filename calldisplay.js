@@ -13,6 +13,7 @@ class CallDisplay {
 		this._acceptaudio = opts.acceptaudio;
 		this._decline = opts.decline;
 		this._ringer = opts.ringer;
+		this._ringtone = opts.ringtone;
 		this._keypad = opts.keypad;
 		this._phonebook = opts.phonebook;
 
@@ -172,11 +173,15 @@ class CallDisplay {
 		if(isringing) {
 			this._ringer.setAttribute('data-user', this._ringer.value);
 			this._ringer.value = this._session.exten;
+			this._ringtone.currentTime = 0;
+			this._ringtone.loop = true;
+			this._ringtone.play();
 		} else {
 			if(this._ringer.hasAttribute('data-user')) {
 				this._ringer.value = this._ringer.getAttribute('data-user');
 				this._ringer.removeAttribute('data-user');
 			}
+			this._ringtone.pause();
 		}
 	}
 

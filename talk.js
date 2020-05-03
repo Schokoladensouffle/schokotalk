@@ -14,6 +14,7 @@ window.addEventListener('load', () => {
 	var screenshare = document.getElementById('screenshare');
 	var keypad = document.getElementById('keypad');
 	var phonebook = document.getElementById('phonebook');
+	var ringtone = document.getElementById('ringtone');
 
 	const calldisplay = new CallDisplay(null, {
 		audiomute: audiomute,
@@ -27,6 +28,7 @@ window.addEventListener('load', () => {
 		acceptaudio: callaudio,
 		decline: hangup,
 		ringer: number,
+		ringtone: ringtone,
 		keypad: keypad,
 		phonebook: phonebook
 	});
