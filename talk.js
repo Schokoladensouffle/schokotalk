@@ -52,6 +52,9 @@ window.addEventListener('load', () => {
 	});
 
 	document.addEventListener('keydown', (event) => {
+		if(document.activeElement == number) {
+			return;
+		}
 		const digit = event.key;
 		if(digit.match(/^[0-9*#]$/)) {
 			if(uadisplay.exten === null) {
@@ -78,6 +81,10 @@ window.addEventListener('load', () => {
 				calldisplay.hangup();
 			} else {
 				uadisplay.exten = '';
+			}
+		} else if(digit == "Backspace") {
+			if(uadisplay.exten) {
+				uadisplay.exten = uadisplay.exten.substr(0, uadisplay.exten.length - 1);
 			}
 		}
 	});
