@@ -42,6 +42,9 @@ class CallDisplay {
 				this.dtmf(event.target.getAttribute('data-dtmf'));
 			});
 		});
+		this._localvideo.addEventListener('click', (event) => {
+			this._mainvideo = event.target;
+		});
 
 		this.session = session;
 	}
